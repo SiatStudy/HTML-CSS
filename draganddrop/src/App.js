@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import React from "react";
 import './App.css';
 import Food from './Component/Food';
 
@@ -14,50 +15,66 @@ import rice from './images/rice.png'
 
 import {useState} from "react";
 
-function App() {
+function AppFood() {
 
   const [img, setImg] = useState({
     id : '',
-    food : ''
+    food : '',
+    src : ''
   });
+
+  // const imgSrc = [banana, beer, bread, cherry, coffee, juice, noodle, orange, rice];
+  // const foodDataset = { banana : "dessert", beer : "drink", bread : "meal", cherry : "dessert",
+  //                      coffee : "drink", juice : "drink", noodle : "meal", orange : "dessert", rice : "meal"};
 
   function onDragStart(e){
     setImg({...img,
       id : e.target.id,
-      food : e.target.dataset.food
+      food : e.target.dataset.food,
+      src : e.target.src
     })
     console.log(img);
   }
 
-  const imgSrc = [banana, beer, bread, cherry, coffee, juice, noodle, orange, rice];
-  const foodDataset = { banana : "dessert", beer : "drink", bread : "meal", cherry : "dessert",
-                       coffee : "drink", juice : "drink", noodle : "meal", orange : "dessert", rice : "meal"}
 
-  function renderFood(){
-    let tags = [];
+  // function renderFood(){
+  //   let tags = [];
     
-    for (let i = 0; i < imgSrc.length; i++) {
-      tags.push(
-        <li key={`f${i+1}`}>
-          <img id={`f${i+1}`} src={imgSrc[i]} alt="음식" data-food={foodDataset[imgSrc[i]]}/>
-        </li>
-      );
-    }
+  //   for (let i = 0; i < imgSrc.length; i++) {
+  //     tags.push(
+  //       <li key={`f${i+1}`}>
+  //         <img id={`f${i+1}`} src={imgSrc[i]} alt="음식" data-food={foodDataset[imgSrc[i]]}/>
+  //       </li>
+  //     );
+  //   }
      
-    return (
-      <ul id='food' onDragStart={onDragStart}>{tags}</ul>
-    );
-  }
+  //   return (
+  //     <ul id='food' onDragStart={onDragStart}>
+  //       <li>{tags}</li>
+  //     </ul>
+  //   );
+  // }
 
   return (
     <div>
       <h2>준비된 음식</h2>
-      {renderFood()}
-      <Food category='dessert'></Food>
-      <Food category='drink'></Food>
-      <Food category='meal'></Food>
+      {/* {renderFood()} */}
+      <ul id='food' onDragStart={onDragStart}>
+        <li><img id="f1" src={banana} alt="바나나" data-food="dessert"></img></li>
+        <li><img id="f2" src={beer} alt="맥주" data-food="drink"></img></li>
+        <li><img id="f3" src={bread} alt="빵" data-food="meal"></img></li>
+        <li><img id="f4" src={cherry} alt="체리" data-food="dessert"></img></li>
+        <li><img id="f5" src={coffee} alt="커피" data-food="drink"></img></li>
+        <li><img id="f6" src={juice} alt="쥬스" data-food="drink"></img></li>
+        <li><img id="f7" src={noodle} alt="면" data-food="meal"></img></li>
+        <li><img id="f8" src={orange} alt="오렌지" data-food="dessert"></img></li>
+        <li><img id="f9" src={rice} alt="쌀밥" data-food="meal"></img></li>
+      </ul>
+      <Food category='dessert' img={img} setImg={setImg}></Food>
+      <Food category='drink' img={img} setImg={setImg}></Food>
+      <Food category='meal' img={img} setImg={setImg}></Food>
     </div>
   );
 }
 
-export default App;
+export default AppFood;
